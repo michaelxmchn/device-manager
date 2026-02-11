@@ -1,115 +1,55 @@
 {
   "version": "1.0",
-  "updated_at": "2026-02-11T13:23:00+08:00",
+  "updated_at": "2026-02-11T13:29:00+08:00",
   "computers": {
     "old-pc": {
       "name": "旧电脑",
+      "alias": "openclaw-main",
+      "internal_name": "旧电脑",
+      "discord_name": null,
       "ip": "192.168.1.17",
       "os": "Ubuntu 24.04",
       "hostname": "michael-Default-string",
       "ssh_user": "michael",
-      "sudo_password": "uptoyou1A",
       "status": "online",
-      "capabilities": {
-        "ollama": true,
-        "openclaw": true,
-        "print": false,
-        "tailscale": false
-      },
-      "ollama": {
-        "version": "0.15.6",
-        "models": [
-          {
-            "name": "deepseek-r1:7b",
-            "size": "4.7 GB",
-            "type": "reasoning",
-            "use_case": "复杂推理、代码分析、长文本"
-          },
-          {
-            "name": "llama3.2:3b",
-            "size": "2.0 GB",
-            "type": "fast",
-            "use_case": "快速响应、简单问答"
-          }
-        ],
-        "default_model": "llama3.2:3b"
-      },
-      "openclaw": {
-        "version": "2026.2.9",
-        "discord_token": "已配置",
-        "channels": ["discord"],
-        "skills": ["healthcheck", "skill-creator", "weather"]
-      }
+      "role": "main-controller"
     },
     "new-pc": {
-      "name": "新电脑",
+      "name": "ollama1",
+      "alias": "ollama-server",
+      "internal_name": "ollama1",
+      "discord_name": null,
       "ip": "192.168.1.67",
       "os": "Ubuntu 24.04",
       "hostname": "michael1-Default-string",
       "ssh_user": "michael1",
-      "sudo_password": "uptoyou1A",
       "status": "online",
-      "capabilities": {
-        "ollama": true,
-        "openclaw": true,
-        "print": true,
-        "tailscale": false
+      "role": "web-server",
+      "permissions": {
+        "default": "readonly",
+        "admin_users": ["michael-waterbear"]
       },
-      "ollama": {
-        "version": "unknown",
-        "models": [
-          {
-            "name": "qwen2.5-coder:7b",
-            "size": "4.7 GB",
-            "type": "code",
-            "use_case": "代码生成、调试"
-          },
-          {
-            "name": "qwen2.5-coder:14b",
-            "size": "8.9 GB",
-            "type": "code",
-            "use_case": "复杂代码、代码分析"
-          }
-        ],
-        "default_model": "qwen2.5-coder:7b"
-      },
-      "openclaw": {
-        "version": "2026.2.9",
-        "discord_token": "已配置",
-        "channels": ["discord"],
-        "skills": ["healthcheck", "skill-creator", "weather"]
+      "web_server": {
+        "port": 8080,
+        "status": "待配置"
       }
     }
   },
-  "peripherals": {
-    "printers": [
-      {
-        "name": "Lenovo LJ2250",
-        "ip": "192.168.1.102",
-        "connected_to": "新电脑",
-        "status": "configured",
-        "driver": "raw",
-        "notes": "需要禁用双向支持"
-      }
-    ]
-  },
-  "task_assignment": {
-    "code_generation": {
-      "preferred": "qwen2.5-coder:14b",
-      "alternative": "qwen2.5-coder:7b",
-      "computer": "new-pc"
+  "name_mapping": {
+    "ollama1": {
+      "meaning": "内部沟通名称，指代新电脑",
+      "discord_name": "需要设置",
+      "ip": "192.168.1.67"
     },
-    "quick_task": {
-      "preferred": "llama3.2:3b",
-      "computer": "old-pc"
-    },
-    "reasoning_task": {
-      "preferred": "deepseek-r1:7b",
-      "computer": "old-pc"
-    },
-    "printing": {
-      "computer": "new-pc",
-      "printer": "Lenovo LJ2250"
+    "openclaw-main": {
+      "meaning": "内部沟通名称，指代旧电脑",
+      "discord_name": "需要设置",
+      "ip": "192.168.1.17"
     }
+  },
+  "communication_rules": {
+    "rule1": "使用 'ollama1' 指代新电脑 (192.168.1.67)",
+    "rule2": "使用 'openclaw-main' 指代旧电脑 (192.168.1.17)",
+    "rule3": "ollama1 默认只读模式，只有 @michael-waterbear 有写入权限"
   }
 }
